@@ -1,0 +1,30 @@
+:root{
+    --global-border-radius: 0px;
+
+    --btn-font-weight: 700;
+
+    --item-background: none;
+    --item-border: 1px solid var(--color-shader);
+
+    --panel-border-bottom: 2px solid var(--color-shader);
+
+    --input-background: none;
+    --input-normal-border: 1px solid var(--color-shader);
+
+    --btn-secondary-background: transparent;
+    --btn-secondary-color: var(--color-primary);
+    --btn-secondary-border: 1px solid var(--color-primary);
+}
+
+.btn-primary:hover{
+    background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover{
+    color: var(--color-base-100);
+    background-color: var(--color-primary);
+}
+
+.item:hover{
+    border-color: var(--color-primary);
+}

@@ -1,0 +1,13 @@
+:root{
+    --modal-background: var(--color-shader);
+    --modal-border-radius: var(--card-border-radius);
+    --modal-border: var(--card-border);
+    --modal-shadow: var(--card-shadow);
+}
+
+.modal {
+    background: var(--modal-background);
+    border-radius: var(--modal-border-radius);
+    border: var(--modal-border);
+    box-shadow: var(--modal-shadow);
+}

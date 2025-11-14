@@ -1,0 +1,24 @@
+:root{
+    --item-background: var(--color-shader);
+    --item-border-radius: var(--card-border-radius);
+    --item-border: var(--card-border);
+    --item-shadow: var(--card-shadow);
+    --item-color: var(--global-text-color);
+
+    --item-transition-duration: var(--global-transition-duration);
+    --item-transition-easing: var(--global-transition-easing);
+    --item-transition-properties: var(--global-transition-properties);
+}
+
+.item {
+    position: relative;
+    background: var(--item-background);
+    border-radius: var(--item-border-radius);
+    border: var(--item-border);
+    box-shadow: var(--item-shadow);
+    color: var(--item-color);
+
+    transition-duration: var(--item-transition-duration);
+    transition-timing-function: var(--item-transition-easing);
+    transition-property: var(--item-transition-properties);
+}

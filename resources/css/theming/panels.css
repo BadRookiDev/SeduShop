@@ -1,0 +1,7 @@
+:root{
+    --panel-border-bottom: none;
+}
+
+.panel{
+    border-bottom: var(--panel-border-bottom);
+}

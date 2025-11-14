@@ -1,0 +1,24 @@
+:root {
+    --card-background: var(--color-shader);
+    --card-border-radius: var(--global-border-radius);
+    --card-border: none;
+    --card-shadow: none;
+
+    --card-transition-duration: var(--global-transition-duration);
+    --card-transition-easing: var(--global-transition-easing);
+    --card-transition-properties: var(--global-transition-properties);
+}
+
+@layer components {
+    .card {
+        position: relative;
+        background: var(--card-background);
+        border-radius: var(--card-border-radius);
+        border: var(--card-border);
+        box-shadow: var(--card-shadow);
+
+        transition-duration: var(--card-transition-duration);
+        transition-timing-function: var(--card-transition-easing);
+        transition-property: var(--card-transition-properties);
+    }
+}

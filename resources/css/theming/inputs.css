@@ -1,0 +1,42 @@
+:root{
+    --input-border-radius: var(--global-border-radius);
+    --input-font-weight: var(--paragraph-font-weight);
+    --input-font: var(--paragraph-font);
+
+    --input-normal-background: none;
+    --input-normal-color: black;
+    --input-normal-border: none;
+
+    --input-transition-duration: var(--global-transition-duration);
+    --input-transition-easing: var(--global-transition-easing);
+    --input-transition-properties: var(--global-transition-properties);
+
+    --label-font-weight: var(--title-font-weight);
+    --label-font: var(--title-font);
+    --label-color: black;
+}
+
+.input {
+    border-radius: var(--input-border-radius);
+    font-weight: var(--input-font-weight);
+    font-family: var(--input-font), sans-serif;;
+
+    transition-duration: var(--input-transition-duration);
+    transition-timing-function: var(--input-transition-easing);
+    transition-property: var(--input-transition-properties);
+}
+
+.input-normal {
+    background: var(--input-normal-background);
+    color: var(--input-normal-color);
+    border: var(--input-normal-border);
+}
+
+.label {
+    color: var(--label-color);
+    font-weight: var(--label-font-weight);
+    font-family: var(--label-font), sans-serif;
+}
+
+
+

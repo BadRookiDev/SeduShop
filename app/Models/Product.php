@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+//todo: product_locale_override table (multiple columns are overridable per locale: name, categories and default_slug, product_data_override) [this is central db]
+
+//todo: product_tenant_override table (ONLY COLUMN overridable on the original product table is: product_data_override)
+//todo: product_tenant_locale_override table (multiple columns are overridable per tenant, name, categories and default_slug, product_data_override)
+
+//todo: product_tags table (with locale_field)
+
+class Product extends Model
+{
+    protected $connection = 'pgsql';
+
+
+    private static $imageJsonKeys = [
+        'probo' => 'images.*.url',
+    ];
+
+    /**
+     * Cast JSON columns to arrays so decoded values are available as PHP arrays.
+     */
+    protected $casts = [
+        'catalog_index_data'    => 'array',
+        'vendor_product_data'   => 'array',
+        'product_data_override' => 'array',
+    ];
+
+    public function toQuickSearchResult(): array
+    {
+        $imageUrlJsonKey = self::$imageJsonKeys[$this->vendor];
+
+        $imageUrl = data_get($this->product_data_override, $imageUrlJsonKey)
+            ?? data_get($this->vendor_product_data, $imageUrlJsonKey);
+
+        if (is_array($imageUrl)) {
+            $imageUrl = $imageUrl[0] ?? null;
+        }
+
+        return [
+            'id'   => $this->id,
+            'name' => $this->name,
+            'default_slug' => $this->default_slug,
+            'imageUrl' => $imageUrl
+        ];
+    }
+}
