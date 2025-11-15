@@ -27,15 +27,22 @@ class AdvertisingProductHub
         $this->advertisingProductManagers[$vendor]->indexFullCatalog();
     }
 
-    public function getProduct($productId): Product
+    public function getProduct($productId, $avoidApiCalls = false): Product
     {
         $product = Product::query()->findOrFail($productId);
 
+        if ($avoidApiCalls) {
+            return $product;
+        }
+
         $productManager = $this->advertisingProductManagers[$product->vendor];
 
-        $product = $productManager->fetchAndUpdateProduct($product);
+        return $productManager->fetchAndUpdateProduct($product);
+    }
 
-        return $product;
+    public function getProductManager($vendor): AdvertisingProductManager
+    {
+        return $this->advertisingProductManagers[$vendor];
     }
 
 

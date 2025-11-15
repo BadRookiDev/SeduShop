@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Facades\AdvertisingProductHub;
+use App\Services\ProductManagement\Advertising\AdvertisingProductManager;
 use Illuminate\Database\Eloquent\Model;
 
 //todo: product_locale_override table (multiple columns are overridable per locale: name, categories and default_slug, product_data_override) [this is central db]
-
-//todo: product_tenant_override table (ONLY COLUMN overridable on the original product table is: product_data_override)
 //todo: product_tenant_locale_override table (multiple columns are overridable per tenant, name, categories and default_slug, product_data_override)
 
 //todo: product_tags table (with locale_field)
@@ -46,5 +46,10 @@ class Product extends Model
             'default_slug' => $this->default_slug,
             'imageUrl' => $imageUrl
         ];
+    }
+
+    public function getProductManager(): AdvertisingProductManager
+    {
+        return AdvertisingProductHub::getProductManager($this->vendor);
     }
 }

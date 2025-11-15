@@ -13,8 +13,6 @@ class ProductSearchController
         $search = Str::lower($request->get('q'));
         //todo: get banned products for tenant
 
-        //todo: product categories query apart
-
         $productNames = Product::query()
             ->where('industry', 'advertising') //in the future we get this from the current tenant (industry field needed for performance)
             ->where('name', 'ILIKE', "%{$search}%")

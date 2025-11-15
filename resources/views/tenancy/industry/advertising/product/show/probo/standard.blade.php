@@ -17,8 +17,6 @@
         $imageUrls = collect($images)
             ->filter(fn($img) => ($img['language'] ?? 'all') === 'all' || $img['language'] === $locale)
             ->pluck('url');
-
-        $optionsTree = data_get($vp, 'options', []);
     @endphp
 
     <div class="container mx-auto px-8 py-32">
@@ -36,7 +34,7 @@
                     <div class="grid grid-cols-6 gap-2">
                         @foreach($imageUrls->slice(1) as $thumb)
                             <button type="button"
-                                    class="relative aspect-square rounded-xl overflow-hidden border border-gray-200 hover:border-primary">
+                                    class="relative aspect-square overflow-hidden border border-gray-200 hover:border-primary">
                                 <img src="{{ $thumb }}" alt="{{ $title }}" class="w-full h-full object-cover"
                                      loading="lazy">
                             </button>
@@ -61,19 +59,31 @@
                 </div>
 
                 {{-- Progressive attribute tree form --}}
-                <form method="POST" action="#" class="space-y-10" id="product-config-form">
+                <form method="POST" action="#" id="product-config-form">
                     @csrf
 
-                    <div id="config-root" class="space-y-10"></div>
+                    <div id="config-root" class="space-y-8"></div>
 
-                    <div class="flex items-center gap-4 pt-4 border-t border-gray-200">
-                        <button type="submit" class="btn btn-primary px-8 h-12">Voeg toe aan winkelwagen</button>
-                        <button type="button" class="btn btn-secondary px-8 h-12" id="save-config-btn">Bewaar
-                            configuratie
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary p-4 w-full mt-16">Voeg toe aan winkelwagen</button>
                 </form>
             </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 mt-16">
+            @foreach($productData['accessories'] as $accessory)
+
+                <div class="p-4 item flex flex-col gap-4 h-full" data-path="">
+                    <label class="text-sm font-medium option-name">{{ $accessory['translations'][$locale]['name'] }}</label>
+
+                    <div class="rounded-item overflow-hidden">
+                        <img src="{{ $accessory['images'][0]['url'] }}" class="object-cover option-image"
+                             alt="{{ $accessory['translations'][$locale]['name'] }}" loading="lazy"/>
+                    </div>
+
+                    <input class="w-full input input-normal py-1 px-2 mt-auto" type="number" min="0" value="0">
+                </div>
+
+            @endforeach
         </div>
     </div>
 
@@ -99,7 +109,7 @@
                 </div>
             </div>
 
-            <div class="mt-3 rounded-lg overflow-hidden bg-gray-50 option-image-wrapper hidden">
+            <div class="mt-3 rounded-item overflow-hidden option-image-wrapper hidden">
                 <img src="" alt="" class="object-cover option-image" loading="lazy"/>
             </div>
         </label>
@@ -117,12 +127,10 @@
     </template>
 
     <script>
-        //todo: autoselect radio option if singular
-        //todo: accessoiries in to checkboxes not radios
-
         (function () {
             const locale = @json($locale);
-            const rootData = @json($optionsTree);
+            const rootData = @json($productData['options']);
+            const detailsUrl = @json(route('product.show.details', $product->id)); // new details endpoint URL
             const configRoot = document.getElementById('config-root');
             const summaryEl = document.getElementById('config-summary');
             const formEl = document.getElementById('product-config-form');
@@ -132,6 +140,8 @@
             const tplNumber = document.getElementById('tpl-number-option');
 
             const nodeIndex = new Map(); // path => node
+            let detailsLoaded = false;
+            let pendingDetailsPromise = null;
 
             function makePath(trail) {
                 return trail.join('__');
@@ -155,10 +165,41 @@
                 }
             }
 
+            // Load second level details once and reintegrate them into rootData structure
+            function ensureDetailsLoaded() {
+                if (detailsLoaded) return Promise.resolve();
+                if (pendingDetailsPromise) return pendingDetailsPromise;
+
+                pendingDetailsPromise = fetch(detailsUrl, {headers: {'Accept': 'application/json'}})
+                    .then(r => r.json())
+                    .then(mapping => {
+                        console.log(mapping);
+
+                        Object.entries(mapping).forEach(([pathKey, children]) => {
+                            const [parentCode, childCode] = pathKey.split('__');
+                            const parentNode = rootData.find(p => p.code === parentCode);
+                            if (!parentNode) return;
+                            const optionNode = (parentNode.children || []).find(c => c.code === childCode);
+                            if (!optionNode) return;
+                            // attach children list if not already present
+                            if (!optionNode.children || optionNode.children.length === 0) {
+                                optionNode.children = children;
+                                children.forEach(ch => indexNode(ch, [parentCode, childCode, ch.code]));
+                            }
+                        });
+                        detailsLoaded = true;
+                    })
+                    .catch(err => {
+                        console.error('Failed to load product details', err);
+                    });
+                return pendingDetailsPromise;
+            }
+
             rootData.forEach(parent => indexNode(parent, [parent.code]));
 
             function renderParent(node, trail) {
                 const path = makePath(trail);
+                console.log(path);
                 const parentEl = tplParent.content.firstElementChild.cloneNode(true);
 
                 parentEl.dataset.path = path;
@@ -262,7 +303,7 @@
                 const radios = formEl.querySelectorAll('input[type=radio]:checked');
                 console.log(radios);
 
-                radios.forEach(r => { // fixed arrow function syntax
+                radios.forEach(r => {
                     const parentPath = r.name;
                     const valCode = r.value;
                     const parentNode = nodeIndex.get(parentPath);
@@ -301,9 +342,12 @@
                 if (!parentNode) return;
                 const optionNode = (parentNode.children || []).find(c => c.code === chosenCode);
                 if (!optionNode) return;
-                clearDescendants(groupPath);
-                attachDependentParents(optionNode, groupPath.split('__').concat(chosenCode), groupPath); // pass parent path as anchor
-                updateSummary();
+
+                ensureDetailsLoaded().then(() => {
+                    clearDescendants(groupPath);
+                    attachDependentParents(optionNode, groupPath.split('__').concat(chosenCode), groupPath);
+                    updateSummary();
+                });
             }
 
             function handleNumberChange() {
@@ -324,3 +368,4 @@
         })();
     </script>
 @endsection
+

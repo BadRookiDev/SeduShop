@@ -11,5 +11,9 @@ interface AdvertisingProductManager
 
     public function fetchAndUpdateProduct(Product $product): Product;
 
+    public function preprocessProduct(Product $product): array;
+
+    public function filterDetails(Product $product): array;
+
 
 }

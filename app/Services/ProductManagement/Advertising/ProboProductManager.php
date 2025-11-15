@@ -4,6 +4,7 @@ namespace App\Services\ProductManagement\Advertising;
 
 use App\Models\Product;
 use App\Services\ApiHelper;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -99,5 +100,54 @@ class ProboProductManager implements AdvertisingProductManager
             $updateKeys = ['name','industry','vendor','default_slug','vendor_product_id','catalog_index_data','last_fetch_at'];
             Product::upsert(array_values($upsertData), uniqueBy: ['id'], update: $updateKeys);
         });
+    }
+
+    public function preprocessProduct(Product $product): array
+    {
+        // keep only top level options and their direct children; strip deeper descendants
+        $data = $product->vendor_product_data;
+
+        $filteredOptions = collect($data['options'])->filter(function ($option) {
+            return $option['code'] !== 'accessories-cross-sell';
+        })->map(function (mixed $top, int $key) {
+            $newChildren = [];
+
+            foreach ($top['children'] ?? [] as $child) {
+                $child['children'] = [];
+                $newChildren[] = $child;
+            }
+            $top['children'] = $newChildren;
+
+            return $top;
+        })->toArray();
+
+        $accessoriesParent = Arr::first($data['options'], function (array $value, int $key) {
+            return $value['code'] === 'accessories-cross-sell';
+        });
+
+        $accessories = collect($accessoriesParent['children'] ?? [])->filter(function ($option) {
+            return $option['type_code'] === 'cross_sell_pc';
+        });
+
+        return [
+            'options' => $filteredOptions,
+            'accessories' => $accessories->toArray(),
+        ];
+    }
+
+    public function filterDetails(Product $product): array
+    {
+        // return ONLY the stripped second level option data, keyed by path parentCode.firstLevelChildCode
+        $mapping = [];
+
+        foreach ($product->vendor_product_data['options'] ?? [] as $top) {
+            foreach ($top['children'] ?? [] as $child) {
+                if (isset($child['children']) && is_array($child['children']) && count($child['children']) > 0) {
+                    $mapping[ $top['code'] . '__' . $child['code']] = $child['children'];
+                }
+            }
+        }
+
+        return $mapping;
     }
 }
