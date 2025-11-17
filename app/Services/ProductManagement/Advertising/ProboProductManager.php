@@ -4,14 +4,14 @@ namespace App\Services\ProductManagement\Advertising;
 
 use App\Models\Product;
 use App\Services\ApiHelper;
-use Illuminate\Support\Arr;
+use App\Services\ProductManagement\ProductPriceExternalCalculatable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class ProboProductManager implements AdvertisingProductManager
+class ProboProductManager implements AdvertisingProductManager, ProductPriceExternalCalculatable
 {
     private string $BASE_URL = 'https://api.proboprints.com';
 
@@ -31,8 +31,7 @@ class ProboProductManager implements AdvertisingProductManager
         if ($response->failed()) {
             //todo: this function is summoned by a request, we need to log trace id's, tenants.
 
-            Log::error("Failed to fetch product $product->vendor_product_id from Probo API",
-                ['status' => $response->status(), 'body' => $response->body(), 'aspect' => $aspect]);
+            Log::error($response->toException(), ['status' => $response->status(), 'body' => $response->body(), 'aspect' => $aspect]);
 
             return $product;
         }
@@ -60,8 +59,7 @@ class ProboProductManager implements AdvertisingProductManager
                 ->get("$this->BASE_URL/products");
 
             if ($response->failed()) {
-                Log::error('Failed to index products page from Probo API',
-                    ['status' => $response->status(), 'body' => $response->body(), 'aspect' => 'indexing probo products', 'page' => $page]);
+                Log::error($response->toException(), ['status' => $response->status(), 'body' => $response->body(), 'aspect' => 'indexing probo products', 'page' => $page]);
                 break;
             }
 
@@ -104,7 +102,8 @@ class ProboProductManager implements AdvertisingProductManager
 
     public function preprocessProduct(Product $product): array
     {
-        // keep only top level options and their direct children; strip deeper descendants
+        // keep only top level options and their direct children; strip deeper descendants for page load performance
+        // and we remove the accessories-cross-sell option entirely
         $data = $product->vendor_product_data;
 
         $filteredOptions = collect($data['options'])->filter(function ($option) {
@@ -119,25 +118,19 @@ class ProboProductManager implements AdvertisingProductManager
             $top['children'] = $newChildren;
 
             return $top;
-        })->toArray();
-
-        $accessoriesParent = Arr::first($data['options'], function (array $value, int $key) {
-            return $value['code'] === 'accessories-cross-sell';
-        });
-
-        $accessories = collect($accessoriesParent['children'] ?? [])->filter(function ($option) {
-            return $option['type_code'] === 'cross_sell_pc';
-        });
+        })->sortBy(function (mixed $option, int $key) {
+            return $option['code'] == 'amount' && $option['type_code'] == 'parent_amount' ? 1 : 0;
+        })->values()->toArray();
 
         return [
             'options' => $filteredOptions,
-            'accessories' => $accessories->toArray(),
+            'related' => [], //todo think of what to do with this later: tenant should have related_products table
         ];
     }
 
     public function filterDetails(Product $product): array
     {
-        // return ONLY the stripped second level option data, keyed by path parentCode.firstLevelChildCode
+        // return ONLY the stripped second level option data, keyed by path parentCode__firstLevelChildCode
         $mapping = [];
 
         foreach ($product->vendor_product_data['options'] ?? [] as $top) {
@@ -149,5 +142,34 @@ class ProboProductManager implements AdvertisingProductManager
         }
 
         return $mapping;
+    }
+
+    public function calculateExternalPrice(array $productData, int $productId): array
+    {
+        Log::warning('TEST SHIT');
+        Log::warning(json_encode($productData));
+
+        $response = Http::withHeaders(['Authorization' => 'Basic '.config('sedu.api.probo.token')])
+            ->post("$this->BASE_URL/price", $productData);
+
+        if ($response->failed()) {
+            Log::error($response->toException(), [
+                'productData' => $productData,
+                'body' => $response->body(),
+                'status' => $response->status()]);
+
+            abort(500, 'Failed to retrieve product price from external API.');
+        }
+
+        return $response->json();
+    }
+
+    public function getCalculationRequestRules(): array
+    {
+        return [
+            'products.*.code' => 'required|string',
+            'products.*.options.*.code' => 'required|string',
+            'products.*.options.*.value' => 'sometimes|string',
+        ];
     }
 }

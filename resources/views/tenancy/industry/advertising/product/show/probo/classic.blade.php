@@ -41,14 +41,6 @@
                         @endforeach
                     </div>
                 @endif
-
-                <!-- todo: make top variable to match responsive header hight  -->
-                <div class="p-8 card mt-16 sticky" style="top: calc(224px + 4rem);">
-                    <h2 class="text-xl font-semibold">Samenvatting</h2>
-                    <ul class="text-sm text-gray-700 space-y-2 mt-8" id="config-summary">
-                        <li class="text-gray-500">Selecteer opties om de configuratie te zien.</li>
-                    </ul>
-                </div>
             </div>
 
             <div class="md:w-2/3 space-y-8">
@@ -59,30 +51,39 @@
                     @endif
                 </div>
 
-                {{-- Progressive attribute tree form --}}
-                <form id="product-config-form">
-                    <div id="config-root" class="space-y-8"></div>
-
-                    <div class="hidden mt-16" id="price-indication">
-                        <div class="card p-8 flex items-center gap-4 justify-between">
-                            <div>
-                                <p data-total-price class="text-2xl title title-color-alternate"></p>
-                                <p data-unit-price class="text-xl paragraph"></p>
-                            </div>
-
-                            <div>
-                                <label for="prod-time" class="text-sm font-medium option-name block">Productie Tijd</label>
-                                <select id="prod-time" class="input input-normal p-2 mt-1">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="button" id="add-to-cart-btn" data-disabled-hover-message="U moet eerst nog enkele opties selecteren!"
-                            class="btn btn-primary p-4 w-full mt-16" disabled>Voeg toe aan winkelwagen</button>
-                </form>
             </div>
         </div>
+
+        <form id="product-config-form" class="mt-16">
+            <div id="config-root" class="space-y-8"></div>
+
+            <div class="grid grid-cols-2 gap-8 mt-16">
+                <div class="p-8 card">
+                    <h2 class="text-xl font-semibold">Samenvatting</h2>
+                    <ul class="text-sm text-gray-700 space-y-2 mt-8" id="config-summary">
+                        <li class="text-gray-500">Selecteer opties om de configuratie te zien.</li>
+                    </ul>
+                </div>
+
+                <div class="h-full" id="price-indication">
+                    <div class="card p-8 flex items-center gap-4 justify-between h-full">
+                        <div>
+                            <p data-total-price class="text-2xl title title-color-alternate"></p>
+                            <p data-unit-price class="text-xl paragraph"></p>
+                        </div>
+
+                        <div>
+                            <label for="prod-time" class="text-sm font-medium option-name block">Productie Tijd</label>
+                            <select id="prod-time" class="input input-normal p-2 mt-1">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" id="add-to-cart-btn" data-disabled-hover-message="U moet eerst nog enkele opties selecteren!"
+                    class="btn btn-primary p-4 w-full mt-16" disabled>Voeg toe aan winkelwagen</button>
+        </form>
 
         @if(count($productData['related']) > 0)
             <hr class="my-16">
@@ -107,8 +108,7 @@
                             </div>
 
                             <div class="flex gap-2 mt-auto">
-                                <input class="w-full input input-normal py-1
-                                 px-2" type="number" min="0" value="0">
+                                <input class="w-full input input-normal py-1 px-2" type="number" min="0" value="0">
                                 <a class="btn btn-secondary py-1 px-3">
                                     <span class="iconify" data-icon="mdi-eye"></span>
                                 </a>

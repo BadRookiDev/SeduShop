@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@iconify-json/mdi": "^1.2.3",
-        "@iconify/iconify": "^3.1.1"
+        "@iconify/iconify": "^3.1.1",
+        "vanilla-lazyload": "^19.1.3"
     }
 }

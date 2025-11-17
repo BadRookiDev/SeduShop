@@ -24,7 +24,11 @@
     <div class="container mx-auto px-8 py-32">
         <div class="flex flex-col md:flex-row gap-12">
             <div class="md:w-1/3">
-                <div class="w-full rounded-card flex items-center justify-center overflow-hidden">
+                <!-- todo: leading style customizable in typography.css, same with text-size -->
+
+                <h1 class="text-3xl font-bold leading-tight">{{ $title }}</h1>
+
+                <div class="w-full rounded-card flex items-center justify-center overflow-hidden mt-8">
                     @if($imageUrls->isNotEmpty())
                         <img src="{{ $imageUrls->first() }}" alt="{{ $title }}" class="w-full h-full object-cover">
                     @else
@@ -42,6 +46,8 @@
                     </div>
                 @endif
 
+                <p class="mt-8 text-gray-700 leading-relaxed">{{ $description }}</p>
+
                 <!-- todo: make top variable to match responsive header hight  -->
                 <div class="p-8 card mt-16 sticky" style="top: calc(224px + 4rem);">
                     <h2 class="text-xl font-semibold">Samenvatting</h2>
@@ -52,13 +58,6 @@
             </div>
 
             <div class="md:w-2/3 space-y-8">
-                <div>
-                    <h1 class="text-3xl font-bold leading-tight">{{ $title }}</h1>
-                    @if($description)
-                        <p class="mt-4 text-gray-700 leading-relaxed">{{ $description }}</p>
-                    @endif
-                </div>
-
                 {{-- Progressive attribute tree form --}}
                 <form id="product-config-form">
                     <div id="config-root" class="space-y-8"></div>
@@ -107,8 +106,7 @@
                             </div>
 
                             <div class="flex gap-2 mt-auto">
-                                <input class="w-full input input-normal py-1
-                                 px-2" type="number" min="0" value="0">
+                                <input class="w-full input input-normal py-1 px-2" type="number" min="0" value="0">
                                 <a class="btn btn-secondary py-1 px-3">
                                     <span class="iconify" data-icon="mdi-eye"></span>
                                 </a>
@@ -122,7 +120,7 @@
     </div>
 
     {{-- Templates for dynamic rendering --}}
-    @include('tenancy.industry.advertising.product.show.probo.attributes.auto-row-list')
+    @include('tenancy.industry.advertising.product.show.probo.attributes.duo-row-list')
 
     @include('tenancy.industry.advertising.product.show.probo.utils.script')
 @endsection

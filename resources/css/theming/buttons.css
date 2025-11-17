@@ -39,6 +39,13 @@
         color: var(--btn-secondary-color);
         border: var(--btn-secondary-border);
     }
+
+    .btn[disabled]:after {
+        z-index: -1;
+        transition-duration: var(--btn-transition-duration);
+        transition-timing-function: var(--btn-transition-easing);
+        transition-property: all;
+    }
 }
 
 

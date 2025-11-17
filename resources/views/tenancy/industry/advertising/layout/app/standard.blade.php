@@ -21,7 +21,8 @@
 
     <style>
         :root {
-            --global-border-radius: 0px;
+            --global-border-radius: 15px;
+            --btn-border-radius: 9999px;
             --btn-font-weight: 700;
 
             --item-background: none;
@@ -35,12 +36,11 @@
             --color-primary: #FF500B;
             --color-secondary: #A62F00;
 
-            /*
+
             --color-primary: #b23a48;
             --color-primary-fade: #fcb9b2;
             --color-secondary: #461220;
             --color-base-100: #f2e4e8;
-            */
 
 
             --btn-secondary-background: transparent;
@@ -51,11 +51,11 @@
             --card-border: 2px solid var(--color-shader);
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not([disabled]) {
             background-color: var(--color-secondary);
         }
 
-        .btn-secondary:hover {
+        .btn-secondary:hover:not([disabled]) {
             color: var(--color-base-100);
             background-color: var(--color-primary);
         }
@@ -63,12 +63,26 @@
         .item:hover {
             border-color: var(--color-primary);
         }
+
+        .btn[disabled]:after {
+            top: 0;
+            left: 0;
+            position: absolute;
+            content: attr(data-disabled-hover-message);
+            width: 100%;
+        }
+
+        .btn[disabled]:hover:after {
+            padding-top: calc(var(--global-spacing) * 4);
+            top: 100%;
+            color: var(--color-primary);
+        }
     </style>
 </head>
 
 <body class="flex flex-col min-h-screen bg-base-200">
 
-@include('tenancy.industry.advertising.layout.header.standard')
+@include('tenancy.industry.advertising.layout.header.classic')
 
 <main class="flex-grow">
     @yield('content')

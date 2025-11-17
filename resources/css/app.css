@@ -37,10 +37,15 @@
     --global-transition-duration: 0.1s;
     --global-transition-easing: ease-in-out;
     --global-transition-properties: all;
+
+    --global-spacing: 0.25rem;
 }
 
 @theme {
     --font-sans: var(--global-font);
+
+    --spacing: var(--global-spacing); /* todo: customizable between 0.2rem and 0.3rem, default 0.25. Not on header & footer */
+
     --radius-sedu: var(--global-border-radius);
 
     --radius-card: var(--card-border-radius);
