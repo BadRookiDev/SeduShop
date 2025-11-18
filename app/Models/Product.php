@@ -31,14 +31,7 @@ class Product extends Model
 
     public function toQuickSearchResult(): array
     {
-        $imageUrlJsonKey = self::$imageJsonKeys[$this->vendor];
-
-        $imageUrl = data_get($this->product_data_override, $imageUrlJsonKey)
-            ?? data_get($this->vendor_product_data, $imageUrlJsonKey);
-
-        if (is_array($imageUrl)) {
-            $imageUrl = $imageUrl[0] ?? null;
-        }
+        $imageUrl = $this->getPrimaryImageUrlAttribute();
 
         return [
             'id'   => $this->id,
@@ -51,5 +44,20 @@ class Product extends Model
     public function getProductManager(): AdvertisingProductManager
     {
         return AdvertisingProductHub::getProductManager($this->vendor);
+    }
+
+    public function getPrimaryImageUrlAttribute()
+    {
+        //todo: add primary_image_url to product table (and override tables), and populate it during first fetch.
+
+        $imageUrlJsonKey = self::$imageJsonKeys[$this->vendor];
+
+        $imageUrl = data_get($this->product_data_override, $imageUrlJsonKey)
+            ?? data_get($this->vendor_product_data, $imageUrlJsonKey);
+
+        if (is_array($imageUrl)) {
+            $imageUrl = $imageUrl[0] ?? "https://picsum.photos/300/300"; //todo: change placeholder image
+        }
+        return $imageUrl ?? "https://picsum.photos/300/300";
     }
 }

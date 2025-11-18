@@ -29,6 +29,9 @@ class IndexAdvertisingCatalogs extends Command
      */
     public function handle()
     {
+        //todo: keep track of starting time, and query created_at > starting time products to see new ones.
+        //todo: trigger a digest email with amount of new products indexed per vendor.
+
         $vendorsArg = $this->argument('vendors');
 
         if (empty($vendorsArg)) {

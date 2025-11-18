@@ -1,7 +1,36 @@
 :root{
-    --panel-border-bottom: none;
+    --panel-border: none;
+    --panel-border-radius: 0;
 }
 
 .panel{
-    border-bottom: var(--panel-border-bottom);
+    border-bottom: var(--panel-border);
+}
+
+.panel.panel-bottom{
+    border-bottom: none;
+    border-top: var(--panel-border);
+}
+
+.panel.panel-right{
+    border-bottom: none;
+    border-left: var(--panel-border);
+}
+
+.panel.panel-left{
+    border-bottom: none;
+    border-right: var(--panel-border);
+}
+
+header.panel{
+    border-bottom-left-radius: var(--panel-border-radius);
+    border-bottom-right-radius: var(--panel-border-radius);
+    border-bottom: var(--panel-border);
+}
+
+footer.panel.panel-bottom{
+    border-top-left-radius: var(--panel-border-radius);
+    border-top-right-radius: var(--panel-border-radius);
+    border-bottom: none;
+    border-top: var(--panel-border);
 }

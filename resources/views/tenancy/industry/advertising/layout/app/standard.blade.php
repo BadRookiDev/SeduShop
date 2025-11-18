@@ -21,14 +21,13 @@
 
     <style>
         :root {
-            --global-border-radius: 15px;
-            --btn-border-radius: 9999px;
+            --global-border-radius: 0;
             --btn-font-weight: 700;
 
             --item-background: none;
             --item-border: 1px solid var(--color-shader);
 
-            --panel-border-bottom: 2px solid var(--color-shader);
+            --panel-border: 2px solid var(--color-shader);
 
             --input-background: none;
             --input-normal-border: 1px solid var(--color-shader);
@@ -36,12 +35,12 @@
             --color-primary: #FF500B;
             --color-secondary: #A62F00;
 
-
+            /*
             --color-primary: #b23a48;
             --color-primary-fade: #fcb9b2;
             --color-secondary: #461220;
             --color-base-100: #f2e4e8;
-
+            */
 
             --btn-secondary-background: transparent;
             --btn-secondary-color: var(--color-primary);
@@ -82,11 +81,13 @@
 
 <body class="flex flex-col min-h-screen bg-base-200">
 
-@include('tenancy.industry.advertising.layout.header.classic')
+@include('tenancy.industry.advertising.layout.header.standard')
 
 <main class="flex-grow">
     @yield('content')
 </main>
+
+@include('tenancy.industry.advertising.layout.footer.standard')
 
 @stack('scripts')
 @include('tenancy.industry.advertising.layout.utils.quicksearch')

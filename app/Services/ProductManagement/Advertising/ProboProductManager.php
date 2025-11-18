@@ -146,17 +146,17 @@ class ProboProductManager implements AdvertisingProductManager, ProductPriceExte
 
     public function calculateExternalPrice(array $productData, int $productId): array
     {
-        Log::warning('TEST SHIT');
-        Log::warning(json_encode($productData));
-
         $response = Http::withHeaders(['Authorization' => 'Basic '.config('sedu.api.probo.token')])
             ->post("$this->BASE_URL/price", $productData);
 
         if ($response->failed()) {
+            $responseBody = $response->body();
+
             Log::error($response->toException(), [
                 'productData' => $productData,
-                'body' => $response->body(),
-                'status' => $response->status()]);
+                'body' => json_decode($responseBody, true) ?? $responseBody,
+                'status' => $response->status()
+            ]);
 
             abort(500, 'Failed to retrieve product price from external API.');
         }

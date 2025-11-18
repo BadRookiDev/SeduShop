@@ -111,7 +111,7 @@
                 inp.step = node.step_size ?? 1;
 
                 const limits = [];
-                if (node.min_value != null) limits.push('min ' + node.min_value);
+                if (node.min_value != null && node.min_value != 0) limits.push('min ' + node.min_value);
                 if (node.max_value != null && node.max_value != 99999) limits.push('max ' + node.max_value);
                 if (limits.length) el.querySelector('.limits').textContent = limits.join(' · ');
 

@@ -4,6 +4,8 @@ use App\Http\Controllers\Product\ProductSearchController;
 use App\Http\Controllers\Product\TenantProductController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/producten', [TenantProductController::class, 'index'])->name('product.index');
+
 Route::get('/producten/quick-search', [ProductSearchController::class, 'quickSearchProduct']);
 
 Route::get('/producten/{productId}', [TenantProductController::class, 'show'])->name('product.show');

@@ -4,18 +4,31 @@ namespace App\Http\Controllers\Product;
 
 use App\Facades\AdvertisingProductHub;
 use App\Http\Requests\Product\RetrieveProductPriceRequest;
+use App\Models\Product;
 use App\Services\ProductManagement\ProductPriceExternalCalculatable;
 use Illuminate\Support\Facades\Response;
 
 
 class TenantProductController
 {
+    public function index()
+    {
+        $products = Product::query()
+            ->where('industry', '=', 'advertising')
+            ->paginate(24);
+
+        $viewPath = 'tenancy.industry.advertising.product.index.vertical';
+
+        return view($viewPath, compact('products'));
+    }
+
+
     public function show($productId)
     {
         $product = AdvertisingProductHub::getProduct($productId);
         $productData = $product->getProductManager()->preprocessProduct($product);
 
-        $viewPath = 'tenancy.industry.advertising.product.show.' . $product->vendor . '.classic';
+        $viewPath = 'tenancy.industry.advertising.product.show.' . $product->vendor . '.standard';
 
         return view($viewPath, compact('product', 'productData'));
     }
