@@ -34,7 +34,7 @@
         {{-- Products grid --}}
         <div class="grid gap-4 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             @foreach($products as $product)
-                <div class="group @if(true) card @else item @endif p-0 overflow-hidden flex flex-col">
+                <div class="group @if(false) card @else item @endif p-0 overflow-hidden flex flex-col">
 
                     <a href="{{ route('product.show', $product->id) }}"
                        class="aspect-square bg-base-100 relative flex items-center justify-center overflow-hidden">
@@ -46,9 +46,8 @@
                     <div class="p-4 flex flex-col gap-3 flex-1">
                         <h2 class="title font-semibold leading-snug">{{ $product->name }}</h2>
                         <div class="mt-auto flex items-center justify-between">
-                            <a href="{{ route('product.index', ['categorie' => $product->category_level_3 ?? $product->category_level_2 ?? $product->category_level_1 ?? 'Overige Producten']) }}"
-                               class="paragraph">
-                                <small>
+                            <a href="{{ route('product.index', ['categorie' => $product->category_level_3 ?? $product->category_level_2 ?? $product->category_level_1 ?? 'Overige Producten']) }}">
+                                <small class="small">
                                     {{ $product->category_level_3 ?? $product->category_level_2 ?? $product->category_level_1 ?? 'Overige Producten'}}
                                 </small>
                             </a>

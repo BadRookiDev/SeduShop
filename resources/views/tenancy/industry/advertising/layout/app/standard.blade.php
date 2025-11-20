@@ -24,6 +24,9 @@
             --global-border-radius: 0;
             --btn-font-weight: 700;
 
+            --paragraph-color: #7a8599;
+            --input-color-placeholder: var(--paragraph-color);
+
             --item-background: none;
             --item-border: 1px solid var(--color-shader);
 

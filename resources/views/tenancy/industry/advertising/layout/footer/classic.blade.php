@@ -22,13 +22,13 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-sm text-gray-700 leading-relaxed max-w-3xl">Wij leveren promotionele producten met focus op kwaliteit, snelheid en duurzame keuzes. Ontdek een zorgvuldig samengestelde catalogus en persoonlijk advies voor elke campagne.</p>
+                <p class="text-sm paragraph leading-relaxed max-w-3xl">Wij leveren promotionele producten met focus op kwaliteit, snelheid en duurzame keuzes. Ontdek een zorgvuldig samengestelde catalogus en persoonlijk advies voor elke campagne.</p>
 
                 {{-- Link groups --}}
                 <div class="grid gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                     <div class="space-y-4">
-                        <h3 class="text-[11px] font-semibold tracking-wider uppercase text-gray-500">Shop</h3>
-                        <nav class="space-y-2 text-sm">
+                        <h3 class="text-[11px] font-semibold tracking-wider uppercase title">Shop</h3>
+                        <nav class="space-y-2 text-sm paragraph">
                             <a href="/" class="block hover:text-primary">Alle producten</a>
                             <a href="/promotions" class="block hover:text-primary">Acties</a>
                             <a href="/new" class="block hover:text-primary">Nieuw</a>
@@ -36,8 +36,8 @@
                         </nav>
                     </div>
                     <div class="space-y-4">
-                        <h3 class="text-[11px] font-semibold tracking-wider uppercase text-gray-500">Service</h3>
-                        <nav class="space-y-2 text-sm">
+                        <h3 class="text-[11px] font-semibold tracking-wider uppercase title">Service</h3>
+                        <nav class="space-y-2 text-sm paragraph">
                             <a href="/customer-service" class="block hover:text-primary">Helpcentrum</a>
                             <a href="/shipping" class="block hover:text-primary">Verzending</a>
                             <a href="/returns" class="block hover:text-primary">Retouren</a>
@@ -45,8 +45,8 @@
                         </nav>
                     </div>
                     <div class="space-y-4">
-                        <h3 class="text-[11px] font-semibold tracking-wider uppercase text-gray-500">Account</h3>
-                        <nav class="space-y-2 text-sm">
+                        <h3 class="text-[11px] font-semibold tracking-wider uppercase title">Account</h3>
+                        <nav class="space-y-2 text-sm paragraph">
                             @guest
                                 <a href="/login" class="block hover:text-primary">Inloggen</a>
                                 <a href="/register" class="block hover:text-primary">Registreren</a>
@@ -59,8 +59,8 @@
                         </nav>
                     </div>
                     <div class="space-y-4">
-                        <h3 class="text-[11px] font-semibold tracking-wider uppercase text-gray-500">Over ons</h3>
-                        <nav class="space-y-2 text-sm">
+                        <h3 class="text-[11px] font-semibold tracking-wider uppercase title">Over ons</h3>
+                        <nav class="space-y-2 text-sm paragraph">
                             <a href="/about" class="block hover:text-primary">Ons verhaal</a>
                             <a href="/sustainability" class="block hover:text-primary">Duurzaamheid</a>
                             <a href="/careers" class="block hover:text-primary">Werken bij</a>
@@ -68,8 +68,8 @@
                         </nav>
                     </div>
                     <div class="space-y-4">
-                        <h3 class="text-[11px] font-semibold tracking-wider uppercase text-gray-500">Extra</h3>
-                        <nav class="space-y-2 text-sm">
+                        <h3 class="text-[11px] font-semibold tracking-wider uppercase title">Extra</h3>
+                        <nav class="space-y-2 text-sm paragraph">
                             <a href="/blog" class="block hover:text-primary">Blog</a>
                             <a href="/inspiration" class="block hover:text-primary">Inspiratie</a>
                             <a href="/press" class="block hover:text-primary">Pers</a>
@@ -84,14 +84,14 @@
                 <div class="card p-8 flex flex-col gap-6">
                     <div>
                         <h2 class="text-xl font-bold leading-tight">Nieuwsbrief</h2>
-                        <p class="mt-2 text-sm text-gray-600">1x per week inzichten & exclusieve aanbiedingen. Geen spam.</p>
+                        <p class="mt-2 text-sm paragraph">1x per week inzichten & exclusieve aanbiedingen. Geen spam.</p>
                     </div>
                     <form class="flex flex-col gap-4" novalidate>
                         <label for="classic-news-email" class="sr-only">E-mailadres</label>
                         <input id="classic-news-email" type="email" required placeholder="Uw e-mailadres" class="input input-normal h-11 px-4">
                         <button class="btn btn-primary h-11" type="submit">Inschrijven</button>
                     </form>
-                    <p class="text-[11px] text-gray-500">Door in te schrijven gaat u akkoord met de <a href="/privacy" class="underline hover:text-primary">privacyverklaring</a>.</p>
+                    <p class="text-[11px] paragraph">Door in te schrijven gaat u akkoord met de <a href="/privacy" class="underline hover:text-primary">privacyverklaring</a>.</p>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="item p-4 flex items-center gap-3">
@@ -115,7 +115,7 @@
         </div>
 
         {{-- Bottom unique bar --}}
-        <div class="card p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 bg-base-100 border border-gray-200">
+        <div class="card p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8">
             <div class="flex items-center gap-4">
                 <a href="/" class="inline-flex items-center h-10" aria-label="Home">
                     @include('temp.example-logo')
@@ -135,6 +135,6 @@
                 <span class="iconify size-5" data-icon="mdi-bank" title="Bankoverschrijving"></span>
             </div>
         </div>
-        <div class="text-center text-[11px] text-gray-500">&copy; {{ date('Y') }} SEDUSHOP. Alle rechten voorbehouden.</div>
+        <div class="text-center text-[11px] paragraph">&copy; {{ date('Y') }} SEDUSHOP. Alle rechten voorbehouden.</div>
     </div>
 </footer>

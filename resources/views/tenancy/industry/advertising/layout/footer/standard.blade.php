@@ -4,7 +4,7 @@
         <div class="card p-10 flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between">
             <div class="max-w-xl">
                 <h2 class="text-2xl font-bold leading-tight">Blijf op de hoogte</h2>
-                <p class="mt-2 text-gray-600 text-sm leading-relaxed">Ontvang inspiratie, productupdates en exclusieve acties direct in uw inbox.</p>
+                <p class="mt-2 paragraph text-sm leading-relaxed">Ontvang inspiratie, productupdates en exclusieve acties direct in uw inbox.</p>
             </div>
             <form class="w-full max-w-md flex flex-col sm:flex-row gap-4 relative">
                 <label for="newsletter-email" class="sr-only">E-mailadres</label>
@@ -16,8 +16,8 @@
         {{-- Link grids --}}
         <div class="mt-24 grid gap-16 md:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
             <div class="space-y-4">
-                <h3 class="text-sm font-semibold tracking-wide uppercase text-gray-500">Shop</h3>
-                <nav class="space-y-2 text-sm">
+                <h3 class="text-sm font-semibold tracking-wide uppercase title">Shop</h3>
+                <nav class="space-y-2 text-sm paragraph">
                     <a href="/" class="block hover:text-primary">Alle producten</a>
                     <a href="/promotions" class="block hover:text-primary">Acties</a>
                     <a href="/new" class="block hover:text-primary">Nieuw</a>
@@ -25,8 +25,8 @@
                 </nav>
             </div>
             <div class="space-y-4">
-                <h3 class="text-sm font-semibold tracking-wide uppercase text-gray-500">Klantenservice</h3>
-                <nav class="space-y-2 text-sm">
+                <h3 class="text-sm font-semibold tracking-wide uppercase title">Klantenservice</h3>
+                <nav class="space-y-2 text-sm paragraph">
                     <a href="/customer-service" class="block hover:text-primary">Helpcentrum</a>
                     <a href="/shipping" class="block hover:text-primary">Verzending & levering</a>
                     <a href="/returns" class="block hover:text-primary">Retourbeleid</a>
@@ -34,8 +34,8 @@
                 </nav>
             </div>
             <div class="space-y-4">
-                <h3 class="text-sm font-semibold tracking-wide uppercase text-gray-500">Account</h3>
-                <nav class="space-y-2 text-sm">
+                <h3 class="text-sm font-semibold tracking-wide uppercase title">Account</h3>
+                <nav class="space-y-2 text-sm paragraph">
                     <a href="/login" class="block hover:text-primary">Inloggen</a>
                     <a href="/register" class="block hover:text-primary">Registreren</a>
                     <a href="/orders" class="block hover:text-primary">Bestellingen</a>
@@ -43,8 +43,8 @@
                 </nav>
             </div>
             <div class="space-y-4">
-                <h3 class="text-sm font-semibold tracking-wide uppercase text-gray-500">Over ons</h3>
-                <nav class="space-y-2 text-sm">
+                <h3 class="text-sm font-semibold tracking-wide uppercase title">Over ons</h3>
+                <nav class="space-y-2 text-sm paragraph">
                     <a href="/about" class="block hover:text-primary">Ons verhaal</a>
                     <a href="/sustainability" class="block hover:text-primary">Duurzaamheid</a>
                     <a href="/partners" class="block hover:text-primary">Partners</a>
@@ -52,8 +52,8 @@
                 </nav>
             </div>
             <div class="space-y-4">
-                <h3 class="text-sm font-semibold tracking-wide uppercase text-gray-500">Meer</h3>
-                <nav class="space-y-2 text-sm">
+                <h3 class="text-sm font-semibold tracking-wide uppercase title">Meer</h3>
+                <nav class="space-y-2 text-sm paragraph">
                     <a href="/blog" class="block hover:text-primary">Blog</a>
                     <a href="/inspiration" class="block hover:text-primary">Inspiratie</a>
                     <a href="/press" class="block hover:text-primary">Pers</a>
@@ -61,8 +61,8 @@
                 </nav>
             </div>
             <div class="space-y-4">
-                <h3 class="text-sm font-semibold tracking-wide uppercase text-gray-500">Contact</h3>
-                <div class="space-y-2 text-sm text-gray-700">
+                <h3 class="text-sm font-semibold tracking-wide uppercase title">Contact</h3>
+                <div class="space-y-2 text-sm paragraph">
                     <p class="flex items-center gap-2"><span class="iconify size-4 text-primary" data-icon="mdi-map-marker"></span> Amsterdam, NL</p>
                     <p class="flex items-center gap-2"><span class="iconify size-4 text-primary" data-icon="mdi-telephone"></span> +31 20 123 4567</p>
                     <p class="flex items-center gap-2"><span class="iconify size-4 text-primary" data-icon="mdi-email"></span> info@sedushop.nl</p>
@@ -97,7 +97,7 @@
         </div>
 
         {{-- Bottom bar --}}
-        <div class="mt-24 pt-12 border-t border-gray-200 flex flex-col md:flex-row gap-4 md:gap-8 items-start md:items-center justify-between text-sm text-gray-600">
+        <div class="mt-24 pt-12 border-t border-gray-200 flex flex-col md:flex-row gap-4 md:gap-8 items-start md:items-center justify-between text-sm paragraph">
             <div class="flex items-center gap-3">
                 <a href="/" class="inline-flex items-center h-6">@include('temp.example-logo')</a>
                 <span class="hidden sm:inline">&copy; {{ date('Y') }} SEDUSHOP. Alle rechten voorbehouden.</span>

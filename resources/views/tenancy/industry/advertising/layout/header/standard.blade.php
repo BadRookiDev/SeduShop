@@ -13,13 +13,13 @@
         <div class="flex">
             <div class="grow">
                 {{-- Utility bar --}}
-                <div class="hidden md:flex items-center justify-between pr-4 lg:pr-8 h-12 text-sm text-gray-600">
+                <div class="hidden md:flex items-center justify-between pr-4 lg:pr-8 h-12 text-sm paragraph">
                     <div class="flex items-center gap-4">
                         <span class="whitespace-nowrap">
                             <span class="iconify size-5 text-primary inline" data-icon="mdi-telephone"></span>
                             Vragen? bel ons op <a href="tel:{{ preg_replace('/\s+/', '', $supportPhone) }}"
                                                   class="hover:underline font-bold">{{ $supportPhone }}</a>
-                            <span class="text-gray-400">({{ $supportHours }})</span>
+                            <span class="paragraph">({{ $supportHours }})</span>
                         </span>
                     </div>
 

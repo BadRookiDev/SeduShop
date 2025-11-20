@@ -102,7 +102,7 @@
             if (['width', 'height', 'amount', 'decimal', 'number'].includes(typeCode)) {
                 el = tplNumber.content.firstElementChild.cloneNode(true);
                 el.dataset.path = path;
-                el.querySelector('.option-name').innerHTML = translate(node) + (node.unit_code ? ' <span class="text-gray-500">(' + node.unit_code + ')</span>' : '');
+                el.querySelector('.option-name').innerHTML = translate(node) + (node.unit_code ? ' <span class="paragraph">(' + node.unit_code + ')</span>' : '');
 
                 const inp = el.querySelector('input.option-input');
                 inp.name = path;
@@ -247,7 +247,7 @@
 
             summaryEl.innerHTML = '';
             if (!items.length) {
-                summaryEl.innerHTML = '<li class="text-gray-500">Selecteer opties om de configuratie te zien.</li>';
+                summaryEl.innerHTML = '<li class="paragraph">Selecteer opties om de configuratie te zien.</li>';
             } else {
                 items.forEach(txt => {
                     const li = document.createElement('li');

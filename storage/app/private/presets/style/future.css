@@ -1,0 +1,53 @@
+:root {
+    --global-text-color: white;
+    --global-border-radius: 15px;
+
+    --paragraph-color: #9ba6bc;
+
+    --btn-font-weight: 700;
+
+    --btn-primary-border: 4px solid rgba(0, 0, 0, 0.3);
+    --btn-primary-shadow: none;
+
+    --btn-secondary-border: 4px solid rgba(0, 0, 0, 0.3);
+    --btn-secondary-shadow: none;
+
+    --item-background: var(--color-shader);
+    --item-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+
+    --panel-border: none;
+    --panel-border-radius: 45px;
+
+    --input-background: none;
+    --input-normal-border: 2px solid var(--color-shader);
+    --input-normal-color: var(--color-secondary);
+    --input-color-placeholder: var(--paragraph-color);
+
+    --color-shader: rgba(198, 186, 255, 0.1);
+    --color-primary: #EB3678;
+    --color-secondary: #FF3EA5;
+    --color-base-100: #132642;
+    --color-base-200: #102138;
+
+    --card-background: var(--color-shader);
+    --card-color: white;
+}
+
+.btn-primary:hover:not([disabled]) {
+    --btn-primary-border: 4px solid transparent;
+    --btn-primary-shadow: 0 3px 20px 1px var(--color-primary);
+}
+
+.btn-secondary:hover:not([disabled]) {
+    color: var(--color-base-100);
+    background-color: var(--color-secondary);
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    --item-shadow: 0 20px 20px -15px var(--color-primary);
+}
+
+.item:hover p:first-of-type {
+    color: var(--color-secondary);
+}

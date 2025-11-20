@@ -32,7 +32,7 @@
                     @if($imageUrls->isNotEmpty())
                         <img src="{{ $imageUrls->first() }}" alt="{{ $title }}" class="w-full h-full object-cover">
                     @else
-                        <span class="text-gray-400">Geen afbeelding</span>
+                        <span class="paragraph">Geen afbeelding</span>
                     @endif
                 </div>
                 @if($imageUrls->count() > 1)
@@ -46,13 +46,13 @@
                     </div>
                 @endif
 
-                <p class="mt-8 text-gray-700 leading-relaxed">{{ $description }}</p>
+                <p class="mt-8 paragraph leading-relaxed">{{ $description }}</p>
 
                 <!-- todo: make top variable to match responsive header hight  -->
                 <div class="p-8 card mt-16 sticky" style="top: calc(224px + 4rem);">
                     <h2 class="text-xl font-semibold">Samenvatting</h2>
-                    <ul class="text-sm text-gray-700 space-y-2 mt-8" id="config-summary">
-                        <li class="text-gray-500">Selecteer opties om de configuratie te zien.</li>
+                    <ul class="text-sm paragraph space-y-2 mt-8" id="config-summary">
+                        <li class="paragraph">Selecteer opties om de configuratie te zien.</li>
                     </ul>
                 </div>
             </div>

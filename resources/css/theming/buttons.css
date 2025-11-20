@@ -6,10 +6,12 @@
     --btn-primary-background: var(--color-primary);
     --btn-primary-color: white;
     --btn-primary-border: none;
+    --btn-primary-shadow: none;
 
     --btn-secondary-background: var(--color-secondary);
     --btn-secondary-color: white;
     --btn-secondary-border: none;
+    --btn-secondary-shadow: none;
 
     --btn-transition-duration: var(--global-transition-duration);
     --btn-transition-easing: var(--global-transition-easing);
@@ -32,12 +34,14 @@
         background: var(--btn-primary-background);
         color: var(--btn-primary-color);
         border: var(--btn-primary-border);
+        box-shadow: var(--btn-primary-shadow);
     }
 
     .btn-secondary {
         background: var(--btn-secondary-background);
         color: var(--btn-secondary-color);
         border: var(--btn-secondary-border);
+        box-shadow: var(--btn-secondary-shadow);
     }
 
     .btn[disabled]:after {
@@ -45,6 +49,20 @@
         transition-duration: var(--btn-transition-duration);
         transition-timing-function: var(--btn-transition-easing);
         transition-property: all;
+    }
+
+    .btn[disabled]:after {
+        top: 0;
+        left: 0;
+        position: absolute;
+        content: attr(data-disabled-hover-message);
+        width: 100%;
+    }
+
+    .btn[disabled]:hover:after {
+        padding-top: calc(var(--global-spacing) * 4);
+        top: 100%;
+        color: var(--color-primary);
     }
 }
 

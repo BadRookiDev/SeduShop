@@ -2,14 +2,14 @@
     <div class="bg-base-100 panel pb-8 pt-4">
         <div class="container mx-auto px-8">
             <div class="flex justify-between items-center mb-4">
-                <p class="text-lg font-semibold">Zoekresultaten</p>
+                <p class="text-lg title">Zoekresultaten</p>
 
                 <div class="flex items-center gap-8">
                     <div id="quickSearchMore" class="text-center hidden"
                          data-qs-css-child="underline decoration decoration-secondary text-sm text-secondary">
                     </div>
 
-                    <button id="closeQuickSearch" class="text-sm text-gray-500 hover:text-gray-700">Sluiten</button>
+                    <button id="closeQuickSearch" class="text-sm paragraph hover:text-secondary">Sluiten</button>
                 </div>
             </div>
             <div id="quickSearchResults"

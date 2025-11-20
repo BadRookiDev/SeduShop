@@ -2,8 +2,8 @@
     <div class="bg-base-100 panel pb-8 pt-4">
         <div class="container mx-auto px-8">
             <div class="flex justify-between items-center mb-4">
-                <p class="text-lg font-semibold">Zoekresultaten</p>
-                <button id="closeQuickSearch" class="text-sm text-gray-500 hover:text-gray-700">Sluiten</button>
+                <p class="text-lg title">Zoekresultaten</p>
+                <button id="closeQuickSearch" class="text-sm paragraph hover:text-secondary">Sluiten</button>
             </div>
 
             <div id="quickSearchResults"

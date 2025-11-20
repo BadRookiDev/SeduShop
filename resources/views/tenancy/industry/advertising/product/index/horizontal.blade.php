@@ -46,9 +46,8 @@
                     <div class="p-4 flex flex-col gap-3 justify-between w-full">
                         <h2 class="title font-semibold leading-snug">{{ $product->name }}</h2>
 
-                        <a href="{{ route('product.index', ['categorie' => $product->category_level_3 ?? $product->category_level_2 ?? $product->category_level_1 ?? 'Overige Producten']) }}"
-                           class="paragraph">
-                            <small>
+                        <a href="{{ route('product.index', ['categorie' => $product->category_level_3 ?? $product->category_level_2 ?? $product->category_level_1 ?? 'Overige Producten']) }}">
+                            <small class="small">
                                 {{ $product->category_level_3 ?? $product->category_level_2 ?? $product->category_level_1 ?? 'Overige Producten'}}
                             </small>
                         </a>

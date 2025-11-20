@@ -22,26 +22,34 @@
 .title {
     font-weight: var(--title-font-weight);
     font-family: var(--title-font), sans-serif;;
-    color: var(--title-color);
+}
 
+.title:not(.card .title):not(.item .title) {
+    color: var(--title-color);
     background: var(--title-background);
     -webkit-background-clip: var(--webkit-background-clip);
     -webkit-text-fill-color: var(--webkit-text-fill-color);
 }
 
-.title.title-color-alternate{
+.title.title-color-alternate:not(.card .title):not(.item .title) {
     color: var(--title-alternate-color);
     background: var(--title-alternate-background);
 }
 
 .paragraph {
     font-weight: var(--paragraph-font-weight);
-    font-family: var(--paragraph-font), sans-serif;;
+    font-family: var(--paragraph-font), sans-serif;
+}
+
+.paragraph:not(.card .paragraph):not(.item .paragraph) {
     color: var(--paragraph-color);
 }
 
 .small {
     font-weight: var(--small-font-weight);
-    font-family: var(--small-font), sans-serif;;
+    font-family: var(--small-font), sans-serif;
+}
+
+.small:not(.card .small):not(.item .small) {
     color: var(--small-color);
 }

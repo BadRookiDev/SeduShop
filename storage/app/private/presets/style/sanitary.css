@@ -1,0 +1,58 @@
+:root {
+    --global-border-radius: 8px;
+
+    --btn-primary-background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    --btn-primary-color: white;
+    --btn-secondary-color: var(--btn-primary-color);
+    --btn-font-weight: 700;
+
+    --panel-border: 2px solid var(--color-shader);
+
+    --input-background: none;
+    --input-normal-border: 2px solid var(--color-primary);
+    --input-color-placeholder: var(--color-primary);
+
+    --color-primary: #3E978B;
+    --color-secondary: #1d2440;
+    --color-base-100: #f2f2f6;
+    --color-base-200: #ffffff;
+
+    --card-background: #30395c;
+    --item-background: rgba(29, 36, 64, 0.02);
+    --item-color: black;
+    --card-color: #ebf4ff;
+
+    --card-shadow: 0 4px 6px var(--color-shader);
+}
+
+.btn-primary:hover:not([disabled]) {
+    color: var(--btn-secondary-color);
+    background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover:not([disabled]) {
+    color: var(--btn-primary-color);
+    background-color: var(--color-primary);
+}
+
+.item:hover {
+    border-color: var(--color-primary);
+}
+
+.btn[disabled]:after {
+    top: 0;
+    left: 0;
+    position: absolute;
+    content: attr(data-disabled-hover-message);
+    width: 100%;
+}
+
+.btn[disabled]:hover:after {
+    padding-top: calc(var(--global-spacing) * 4);
+    top: 100%;
+    color: var(--color-primary);
+}
+
+.card{
+    --input-normal-color: var(--card-color);
+}

@@ -3,6 +3,7 @@
     --card-border-radius: var(--global-border-radius);
     --card-border: none;
     --card-shadow: none;
+    --card-color: black;
 
     --card-transition-duration: var(--global-transition-duration);
     --card-transition-easing: var(--global-transition-easing);
@@ -16,6 +17,7 @@
         border-radius: var(--card-border-radius);
         border: var(--card-border);
         box-shadow: var(--card-shadow);
+        color: var(--card-color);
 
         transition-duration: var(--card-transition-duration);
         transition-timing-function: var(--card-transition-easing);

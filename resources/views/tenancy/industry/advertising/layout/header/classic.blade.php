@@ -15,7 +15,7 @@
         <div class="flex flex-row-reverse">
             <div class="grow">
                 {{-- Utility bar --}}
-                <div class="hidden md:flex items-center justify-between pl-4 lg:pl-8 h-12 text-sm text-gray-600">
+                <div class="hidden md:flex items-center justify-between pl-4 lg:pl-8 h-12 text-sm paragraph">
                     <div class="flex items-center bg-shader text-base-100 rounded-btn">
                         <span class="iconify size-11 p-3 bg-secondary rounded-btn" data-icon="mdi-telephone"></span>
 

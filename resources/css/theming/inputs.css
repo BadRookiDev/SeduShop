@@ -3,6 +3,8 @@
     --input-font-weight: var(--paragraph-font-weight);
     --input-font: var(--paragraph-font);
 
+    --input-color-placeholder: white;
+
     --input-normal-background: none;
     --input-normal-color: black;
     --input-normal-border: none;
@@ -14,6 +16,10 @@
     --label-font-weight: var(--title-font-weight);
     --label-font: var(--title-font);
     --label-color: black;
+}
+
+.input::placeholder {
+    color: var(--input-color-placeholder);
 }
 
 .input {

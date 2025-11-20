@@ -1,8 +1,9 @@
 :root {
-    --global-border-radius: 0;
+    --global-border-radius: 15px;
+    --btn-border-radius: 9999px;
     --btn-font-weight: 700;
 
-    --paragraph-color: #7a8599;
+    --paragraph-color: #878384;
     --input-color-placeholder: var(--paragraph-color);
 
     --item-background: none;
@@ -13,8 +14,11 @@
     --input-background: none;
     --input-normal-border: 1px solid var(--color-shader);
 
-    --color-primary: #FF500B;
-    --color-secondary: #A62F00;
+
+    --color-primary: #b23a48;
+    --color-primary-fade: #fcb9b2;
+    --color-secondary: #461220;
+    --color-base-100: #f2e4e8;
 
     --btn-secondary-background: transparent;
     --btn-secondary-color: var(--color-primary);
